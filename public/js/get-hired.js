@@ -1,4 +1,41 @@
 (function () {
+  function bsAvailable() {
+    return !!(window.bootstrap && window.bootstrap.Modal);
+  }
+
+  function showFallbackModal(el) {
+    if (!el) return;
+
+    // Create backdrop (Bootstrap-like)
+    var backdrop = document.querySelector(".modal-backdrop.js-get-hired-backdrop");
+    if (!backdrop) {
+      backdrop = document.createElement("div");
+      backdrop.className = "modal-backdrop fade show js-get-hired-backdrop";
+      document.body.appendChild(backdrop);
+    }
+
+    el.style.display = "block";
+    // force reflow
+    void el.offsetHeight;
+    el.classList.add("show");
+    el.setAttribute("aria-modal", "true");
+    el.removeAttribute("aria-hidden");
+
+    document.body.classList.add("modal-open");
+  }
+
+  function hideFallbackModal(el) {
+    if (!el) return;
+    el.classList.remove("show");
+    el.setAttribute("aria-hidden", "true");
+    el.removeAttribute("aria-modal");
+    el.style.display = "none";
+
+    var backdrop = document.querySelector(".modal-backdrop.js-get-hired-backdrop");
+    if (backdrop && backdrop.parentNode) backdrop.parentNode.removeChild(backdrop);
+    document.body.classList.remove("modal-open");
+  }
+
   function ensureModal() {
     if (document.getElementById("getHiredModal")) return;
 
@@ -51,14 +88,36 @@
     var wrapper = document.createElement("div");
     wrapper.innerHTML = html;
     document.body.appendChild(wrapper.firstChild);
+
+    // Fallback close handling (if Bootstrap JS is not present)
+    var modalEl = document.getElementById("getHiredModal");
+    if (modalEl) {
+      modalEl.addEventListener("click", function (e) {
+        var t = e.target;
+        if (!t) return;
+        if (t === modalEl) hideFallbackModal(modalEl);
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") hideFallbackModal(modalEl);
+      });
+      var dismissers = modalEl.querySelectorAll("[data-bs-dismiss=\"modal\"], .btn-close");
+      for (var i = 0; i < dismissers.length; i++) {
+        dismissers[i].addEventListener("click", function () {
+          hideFallbackModal(modalEl);
+        });
+      }
+    }
   }
 
   function showModal() {
     ensureModal();
-    if (!window.bootstrap || !window.bootstrap.Modal) return;
     var el = document.getElementById("getHiredModal");
-    var modal = window.bootstrap.Modal.getOrCreateInstance(el);
-    modal.show();
+    if (bsAvailable()) {
+      var modal = window.bootstrap.Modal.getOrCreateInstance(el);
+      modal.show();
+      return;
+    }
+    showFallbackModal(el);
   }
 
   async function submit(form) {
@@ -120,4 +179,3 @@
     submit(form);
   });
 })();
-
