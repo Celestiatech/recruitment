@@ -9,12 +9,7 @@ export async function POST(req: Request) {
       phone,
       place,
       role,
-      experience,
-      noticePeriod,
-      profileLink,
-      resumeLink,
-      message,
-      consent
+      experience
     }: {
       name?: string;
       email?: string;
@@ -22,11 +17,6 @@ export async function POST(req: Request) {
       place?: string;
       role?: string;
       experience?: string;
-      noticePeriod?: string;
-      profileLink?: string;
-      resumeLink?: string;
-      message?: string;
-      consent?: string;
     } = await req.json();
 
     const clean = (v?: string) => (typeof v === "string" ? v.trim() : "");
@@ -36,12 +26,7 @@ export async function POST(req: Request) {
       phone: clean(phone),
       place: clean(place),
       role: clean(role),
-      experience: clean(experience),
-      noticePeriod: clean(noticePeriod),
-      profileLink: clean(profileLink),
-      resumeLink: clean(resumeLink),
-      message: clean(message),
-      consent: clean(consent)
+      experience: clean(experience)
     };
 
     if (!payload.name || !payload.email) {
@@ -84,12 +69,7 @@ export async function POST(req: Request) {
         `Phone: ${payload.phone || "-"}\n` +
         `Place: ${payload.place || "-"}\n` +
         `Role: ${payload.role || "-"}\n` +
-        `Experience: ${payload.experience || "-"}\n` +
-        `Notice Period: ${payload.noticePeriod || "-"}\n` +
-        `LinkedIn/Portfolio: ${payload.profileLink || "-"}\n` +
-        `Resume Link: ${payload.resumeLink || "-"}\n` +
-        `Consent: ${payload.consent ? "Yes" : "No"}\n` +
-        `\nMessage:\n${payload.message || "-"}\n`
+        `Experience: ${payload.experience || "-"}\n`
     });
 
     return NextResponse.json({ ok: true });

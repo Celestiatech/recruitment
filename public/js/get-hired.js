@@ -102,37 +102,6 @@
       '                <option>5+ years</option>' +
       "              </select>" +
       "            </div>" +
-      '            <div class="col-12 col-md-6">' +
-      '              <label class="form-label small mb-1">Notice Period</label>' +
-      '              <div class="input-group input-group-sm">' +
-      '                <span class="input-group-text"><i class="las la-clock"></i></span>' +
-      '                <input class="form-control" name="noticePeriod" placeholder="Immediate / 30 days" />' +
-      "              </div>" +
-      "            </div>" +
-      '            <div class="col-12 col-md-6">' +
-      '              <label class="form-label small mb-1">LinkedIn / Portfolio</label>' +
-      '              <div class="input-group input-group-sm">' +
-      '                <span class="input-group-text"><i class="lab la-linkedin-in"></i></span>' +
-      '                <input class="form-control" name="profileLink" placeholder="https://..." />' +
-      "              </div>" +
-      "            </div>" +
-      '            <div class="col-12">' +
-      '              <label class="form-label small mb-1">Resume Link</label>' +
-      '              <div class="input-group input-group-sm">' +
-      '                <span class="input-group-text"><i class="las la-file-alt"></i></span>' +
-      '                <input class="form-control" name="resumeLink" placeholder="Google Drive / Dropbox link" />' +
-      "              </div>" +
-      "            </div>" +
-      '            <div class="col-12">' +
-      '              <label class="form-label small mb-1">Message</label>' +
-      '              <textarea class="form-control form-control-sm" name="message" rows="3" placeholder="Tell us about your skills and what job you want"></textarea>' +
-      "            </div>" +
-      '            <div class="col-12">' +
-      '              <div class="form-check">' +
-      '                <input class="form-check-input" type="checkbox" name="consent" id="getHiredConsent" required>' +
-      '                <label class="form-check-label small" for="getHiredConsent">I agree to be contacted by the agency.</label>' +
-      "              </div>" +
-      "            </div>" +
       '            <div class="col-12">' +
       '              <div class="alert alert-success d-none" id="getHiredOk">Submitted! We will contact you soon.</div>' +
       '              <div class="alert alert-danger d-none" id="getHiredErr"></div>' +
@@ -225,12 +194,7 @@
         phone: String(data.get("phone") || ""),
         place: String(data.get("place") || ""),
         role: String(data.get("role") || ""),
-        experience: String(data.get("experience") || ""),
-        noticePeriod: String(data.get("noticePeriod") || ""),
-        profileLink: String(data.get("profileLink") || ""),
-        resumeLink: String(data.get("resumeLink") || ""),
-        message: String(data.get("message") || ""),
-        consent: String(data.get("consent") || "")
+        experience: String(data.get("experience") || "")
       };
 
       var res = await fetch("/api/hire", {
