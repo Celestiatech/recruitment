@@ -112,11 +112,34 @@
   function showModal() {
     ensureModal();
     var el = document.getElementById("getHiredModal");
-    if (bsAvailable()) {
-      var modal = window.bootstrap.Modal.getOrCreateInstance(el);
-      modal.show();
-      return;
+    try {
+      if (bsAvailable()) {
+        var Modal = window.bootstrap.Modal;
+        if (typeof Modal.getOrCreateInstance === "function") {
+          var modal = Modal.getOrCreateInstance(el);
+          if (modal && typeof modal.show === "function") modal.show();
+          return;
+        }
+        if (typeof Modal === "function") {
+          var modal2 = new Modal(el);
+          if (modal2 && typeof modal2.show === "function") modal2.show();
+          return;
+        }
+      }
+    } catch (_) {
+      // Fall back below
     }
+
+    // jQuery/Bootstrap 4 fallback (if present)
+    try {
+      if (window.jQuery && window.jQuery.fn && typeof window.jQuery.fn.modal === "function") {
+        window.jQuery(el).modal("show");
+        return;
+      }
+    } catch (_) {
+      // Fall back below
+    }
+
     showFallbackModal(el);
   }
 
