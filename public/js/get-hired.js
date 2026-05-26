@@ -44,7 +44,10 @@
       '  <div class="modal-dialog modal-dialog-centered modal-lg get-hired-dialog">' +
       '    <div class="modal-content">' +
       '      <div class="modal-header">' +
-      '        <h5 class="modal-title">Get Hired</h5>' +
+      '        <div>' +
+      '          <h5 class="modal-title mb-0">Get Hired</h5>' +
+      '          <div class="small text-muted">Share your details and we will contact you.</div>' +
+      "        </div>" +
       '        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>' +
       "      </div>" +
       '      <form id="getHiredForm">' +
@@ -52,23 +55,41 @@
       '          <div class="row g-2">' +
       '            <div class="col-12 col-md-6">' +
       '              <label class="form-label small mb-1">Name *</label>' +
-      '              <input class="form-control form-control-sm" name="name" required />' +
+      '              <div class="input-group input-group-sm">' +
+      '                <span class="input-group-text"><i class="las la-user"></i></span>' +
+      '                <input class="form-control" name="name" placeholder="Your full name" required />' +
+      "              </div>" +
       "            </div>" +
       '            <div class="col-12 col-md-6">' +
       '              <label class="form-label small mb-1">Email *</label>' +
-      '              <input class="form-control form-control-sm" name="email" type="email" required />' +
+      '              <div class="input-group input-group-sm">' +
+      '                <span class="input-group-text"><i class="las la-envelope"></i></span>' +
+      '                <input class="form-control" name="email" type="email" placeholder="name@email.com" required />' +
+      "              </div>" +
       "            </div>" +
       '            <div class="col-12 col-md-6">' +
       '              <label class="form-label small mb-1">Phone</label>' +
-      '              <input class="form-control form-control-sm" name="phone" inputmode="tel" placeholder="e.g. +91 98xxxxxxx" />' +
+      '              <div class="input-group input-group-sm">' +
+      '                <span class="input-group-text"><i class="las la-phone"></i></span>' +
+      '                <input class="form-control" name="phone" inputmode="tel" placeholder="+91 98xxxxxxx" />' +
+      "              </div>" +
       "            </div>" +
       '            <div class="col-12 col-md-6">' +
       '              <label class="form-label small mb-1">Place</label>' +
-      '              <input class="form-control form-control-sm" name="place" />' +
+      '              <div class="input-group input-group-sm">' +
+      '                <span class="input-group-text"><i class="las la-map-marker"></i></span>' +
+      '                <input class="form-control" name="place" placeholder="City, State" />' +
+      "              </div>" +
+      "            </div>" +
+      '            <div class="col-12">' +
+      '              <div class="get-hired-divider"></div>' +
       "            </div>" +
       '            <div class="col-12 col-md-6">' +
       '              <label class="form-label small mb-1">Role</label>' +
-      '              <input class="form-control form-control-sm" name="role" placeholder="e.g. Sales, HR, Developer" />' +
+      '              <div class="input-group input-group-sm">' +
+      '                <span class="input-group-text"><i class="las la-briefcase"></i></span>' +
+      '                <input class="form-control" name="role" placeholder="e.g. Sales, HR, Developer" />' +
+      "              </div>" +
       "            </div>" +
       '            <div class="col-12 col-md-6">' +
       '              <label class="form-label small mb-1">Experience</label>' +
@@ -83,15 +104,24 @@
       "            </div>" +
       '            <div class="col-12 col-md-6">' +
       '              <label class="form-label small mb-1">Notice Period</label>' +
-      '              <input class="form-control form-control-sm" name="noticePeriod" placeholder="e.g. Immediate / 30 days" />' +
+      '              <div class="input-group input-group-sm">' +
+      '                <span class="input-group-text"><i class="las la-clock"></i></span>' +
+      '                <input class="form-control" name="noticePeriod" placeholder="Immediate / 30 days" />' +
+      "              </div>" +
       "            </div>" +
       '            <div class="col-12 col-md-6">' +
       '              <label class="form-label small mb-1">LinkedIn / Portfolio</label>' +
-      '              <input class="form-control form-control-sm" name="profileLink" placeholder="Paste link" />' +
+      '              <div class="input-group input-group-sm">' +
+      '                <span class="input-group-text"><i class="lab la-linkedin-in"></i></span>' +
+      '                <input class="form-control" name="profileLink" placeholder="https://..." />' +
+      "              </div>" +
       "            </div>" +
       '            <div class="col-12">' +
       '              <label class="form-label small mb-1">Resume Link</label>' +
-      '              <input class="form-control form-control-sm" name="resumeLink" placeholder="Google Drive / Dropbox link" />' +
+      '              <div class="input-group input-group-sm">' +
+      '                <span class="input-group-text"><i class="las la-file-alt"></i></span>' +
+      '                <input class="form-control" name="resumeLink" placeholder="Google Drive / Dropbox link" />' +
+      "              </div>" +
       "            </div>" +
       '            <div class="col-12">' +
       '              <label class="form-label small mb-1">Message</label>' +
@@ -111,7 +141,7 @@
       "        </div>" +
       '        <div class="modal-footer">' +
       '          <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Close</button>' +
-      '          <button type="submit" class="btn btn-primary btn-sm" id="getHiredSubmit">Submit</button>' +
+      '          <button type="submit" class="btn btn-primary btn-sm" id="getHiredSubmit">Send Request</button>' +
       "        </div>" +
       "      </form>" +
       "    </div>" +

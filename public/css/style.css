@@ -20125,4 +20125,28 @@ body {
   max-height: 60vh;
   overflow-y: auto; }
 
+#getHiredModal .modal-content {
+  border: 0;
+  border-radius: 16px;
+  overflow: hidden; }
+
+#getHiredModal .modal-header {
+  background: linear-gradient(135deg, rgba(254, 173, 68, 0.14), rgba(0, 214, 100, 0.08)); }
+
+#getHiredModal .input-group-text {
+  background: #fff;
+  border-right: 0; }
+
+#getHiredModal .input-group-sm > .form-control {
+  border-left: 0; }
+
+#getHiredModal .form-control:focus,
+#getHiredModal .form-select:focus {
+  box-shadow: 0 0 0 0.2rem rgba(254, 173, 68, 0.18); }
+
+#getHiredModal .get-hired-divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.08);
+  margin: 0.25rem 0 0.5rem; }
+
 /*# sourceMappingURL=style.css.map */
