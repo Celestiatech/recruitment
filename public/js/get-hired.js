@@ -41,7 +41,7 @@
 
     var html =
       '<div class="modal fade" id="getHiredModal" tabindex="-1" aria-hidden="true">' +
-      '  <div class="modal-dialog modal-dialog-centered">' +
+      '  <div class="modal-dialog modal-dialog-centered modal-sm">' +
       '    <div class="modal-content">' +
       '      <div class="modal-header">' +
       '        <h5 class="modal-title">Get Hired</h5>' +
@@ -49,26 +49,26 @@
       "      </div>" +
       '      <form id="getHiredForm">' +
       '        <div class="modal-body">' +
-      '          <div class="row g-3">' +
+      '          <div class="row g-2">' +
       '            <div class="col-12">' +
-      '              <label class="form-label">Name *</label>' +
-      '              <input class="form-control" name="name" required />' +
+      '              <label class="form-label small mb-1">Name *</label>' +
+      '              <input class="form-control form-control-sm" name="name" required />' +
       "            </div>" +
       '            <div class="col-12">' +
-      '              <label class="form-label">Email *</label>' +
-      '              <input class="form-control" name="email" type="email" required />' +
+      '              <label class="form-label small mb-1">Email *</label>' +
+      '              <input class="form-control form-control-sm" name="email" type="email" required />' +
       "            </div>" +
       '            <div class="col-12">' +
-      '              <label class="form-label">Place</label>' +
-      '              <input class="form-control" name="place" />' +
+      '              <label class="form-label small mb-1">Place</label>' +
+      '              <input class="form-control form-control-sm" name="place" />' +
       "            </div>" +
       '            <div class="col-12">' +
-      '              <label class="form-label">Role</label>' +
-      '              <input class="form-control" name="role" placeholder="e.g. Sales, HR, Developer" />' +
+      '              <label class="form-label small mb-1">Role</label>' +
+      '              <input class="form-control form-control-sm" name="role" placeholder="e.g. Sales, HR, Developer" />' +
       "            </div>" +
       '            <div class="col-12">' +
-      '              <label class="form-label">Experience</label>' +
-      '              <input class="form-control" name="experience" placeholder="e.g. Fresher / 2 years" />' +
+      '              <label class="form-label small mb-1">Experience</label>' +
+      '              <input class="form-control form-control-sm" name="experience" placeholder="e.g. Fresher / 2 years" />' +
       "            </div>" +
       '            <div class="col-12">' +
       '              <div class="alert alert-success d-none" id="getHiredOk">Submitted! We will contact you soon.</div>' +
@@ -77,8 +77,8 @@
       "          </div>" +
       "        </div>" +
       '        <div class="modal-footer">' +
-      '          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>' +
-      '          <button type="submit" class="btn btn-primary" id="getHiredSubmit">Submit</button>' +
+      '          <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Close</button>' +
+      '          <button type="submit" class="btn btn-primary btn-sm" id="getHiredSubmit">Submit</button>' +
       "        </div>" +
       "      </form>" +
       "    </div>" +
