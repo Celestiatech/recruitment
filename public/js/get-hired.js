@@ -41,34 +41,67 @@
 
     var html =
       '<div class="modal fade" id="getHiredModal" tabindex="-1" aria-hidden="true">' +
-      '  <div class="modal-dialog modal-dialog-centered modal-sm">' +
+      '  <div class="modal-dialog modal-dialog-centered modal-lg get-hired-dialog">' +
       '    <div class="modal-content">' +
       '      <div class="modal-header">' +
       '        <h5 class="modal-title">Get Hired</h5>' +
       '        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>' +
       "      </div>" +
       '      <form id="getHiredForm">' +
-      '        <div class="modal-body">' +
+      '        <div class="modal-body get-hired-body">' +
       '          <div class="row g-2">' +
-      '            <div class="col-12">' +
+      '            <div class="col-12 col-md-6">' +
       '              <label class="form-label small mb-1">Name *</label>' +
       '              <input class="form-control form-control-sm" name="name" required />' +
       "            </div>" +
-      '            <div class="col-12">' +
+      '            <div class="col-12 col-md-6">' +
       '              <label class="form-label small mb-1">Email *</label>' +
       '              <input class="form-control form-control-sm" name="email" type="email" required />' +
       "            </div>" +
-      '            <div class="col-12">' +
+      '            <div class="col-12 col-md-6">' +
+      '              <label class="form-label small mb-1">Phone</label>' +
+      '              <input class="form-control form-control-sm" name="phone" inputmode="tel" placeholder="e.g. +91 98xxxxxxx" />' +
+      "            </div>" +
+      '            <div class="col-12 col-md-6">' +
       '              <label class="form-label small mb-1">Place</label>' +
       '              <input class="form-control form-control-sm" name="place" />' +
       "            </div>" +
-      '            <div class="col-12">' +
+      '            <div class="col-12 col-md-6">' +
       '              <label class="form-label small mb-1">Role</label>' +
       '              <input class="form-control form-control-sm" name="role" placeholder="e.g. Sales, HR, Developer" />' +
       "            </div>" +
-      '            <div class="col-12">' +
+      '            <div class="col-12 col-md-6">' +
       '              <label class="form-label small mb-1">Experience</label>' +
-      '              <input class="form-control form-control-sm" name="experience" placeholder="e.g. Fresher / 2 years" />' +
+      '              <select class="form-select form-select-sm" name="experience">' +
+      '                <option value="">Select</option>' +
+      '                <option>Fresher</option>' +
+      '                <option>0-1 years</option>' +
+      '                <option>1-3 years</option>' +
+      '                <option>3-5 years</option>' +
+      '                <option>5+ years</option>' +
+      "              </select>" +
+      "            </div>" +
+      '            <div class="col-12 col-md-6">' +
+      '              <label class="form-label small mb-1">Notice Period</label>' +
+      '              <input class="form-control form-control-sm" name="noticePeriod" placeholder="e.g. Immediate / 30 days" />' +
+      "            </div>" +
+      '            <div class="col-12 col-md-6">' +
+      '              <label class="form-label small mb-1">LinkedIn / Portfolio</label>' +
+      '              <input class="form-control form-control-sm" name="profileLink" placeholder="Paste link" />' +
+      "            </div>" +
+      '            <div class="col-12">' +
+      '              <label class="form-label small mb-1">Resume Link</label>' +
+      '              <input class="form-control form-control-sm" name="resumeLink" placeholder="Google Drive / Dropbox link" />' +
+      "            </div>" +
+      '            <div class="col-12">' +
+      '              <label class="form-label small mb-1">Message</label>' +
+      '              <textarea class="form-control form-control-sm" name="message" rows="3" placeholder="Tell us about your skills and what job you want"></textarea>' +
+      "            </div>" +
+      '            <div class="col-12">' +
+      '              <div class="form-check">' +
+      '                <input class="form-check-input" type="checkbox" name="consent" id="getHiredConsent" required>' +
+      '                <label class="form-check-label small" for="getHiredConsent">I agree to be contacted by the agency.</label>' +
+      "              </div>" +
       "            </div>" +
       '            <div class="col-12">' +
       '              <div class="alert alert-success d-none" id="getHiredOk">Submitted! We will contact you soon.</div>' +
@@ -159,9 +192,15 @@
       var payload = {
         name: String(data.get("name") || ""),
         email: String(data.get("email") || ""),
+        phone: String(data.get("phone") || ""),
         place: String(data.get("place") || ""),
         role: String(data.get("role") || ""),
-        experience: String(data.get("experience") || "")
+        experience: String(data.get("experience") || ""),
+        noticePeriod: String(data.get("noticePeriod") || ""),
+        profileLink: String(data.get("profileLink") || ""),
+        resumeLink: String(data.get("resumeLink") || ""),
+        message: String(data.get("message") || ""),
+        consent: String(data.get("consent") || "")
       };
 
       var res = await fetch("/api/hire", {

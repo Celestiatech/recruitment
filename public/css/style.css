@@ -20118,4 +20118,11 @@ body {
   padding: 0.5rem 0.75rem;
   margin-bottom: 0; }
 
+#getHiredModal .get-hired-dialog {
+  max-width: 760px; }
+
+#getHiredModal .get-hired-body {
+  max-height: 60vh;
+  overflow-y: auto; }
+
 /*# sourceMappingURL=style.css.map */

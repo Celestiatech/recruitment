@@ -6,24 +6,42 @@ export async function POST(req: Request) {
     const {
       name,
       email,
+      phone,
       place,
       role,
-      experience
+      experience,
+      noticePeriod,
+      profileLink,
+      resumeLink,
+      message,
+      consent
     }: {
       name?: string;
       email?: string;
+      phone?: string;
       place?: string;
       role?: string;
       experience?: string;
+      noticePeriod?: string;
+      profileLink?: string;
+      resumeLink?: string;
+      message?: string;
+      consent?: string;
     } = await req.json();
 
     const clean = (v?: string) => (typeof v === "string" ? v.trim() : "");
     const payload = {
       name: clean(name),
       email: clean(email),
+      phone: clean(phone),
       place: clean(place),
       role: clean(role),
-      experience: clean(experience)
+      experience: clean(experience),
+      noticePeriod: clean(noticePeriod),
+      profileLink: clean(profileLink),
+      resumeLink: clean(resumeLink),
+      message: clean(message),
+      consent: clean(consent)
     };
 
     if (!payload.name || !payload.email) {
@@ -63,9 +81,15 @@ export async function POST(req: Request) {
         `New Get Hired submission\n\n` +
         `Name: ${payload.name}\n` +
         `Email: ${payload.email}\n` +
+        `Phone: ${payload.phone || "-"}\n` +
         `Place: ${payload.place || "-"}\n` +
         `Role: ${payload.role || "-"}\n` +
-        `Experience: ${payload.experience || "-"}\n`
+        `Experience: ${payload.experience || "-"}\n` +
+        `Notice Period: ${payload.noticePeriod || "-"}\n` +
+        `LinkedIn/Portfolio: ${payload.profileLink || "-"}\n` +
+        `Resume Link: ${payload.resumeLink || "-"}\n` +
+        `Consent: ${payload.consent ? "Yes" : "No"}\n` +
+        `\nMessage:\n${payload.message || "-"}\n`
     });
 
     return NextResponse.json({ ok: true });
@@ -73,4 +97,3 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "Invalid request." }, { status: 400 });
   }
 }
-
