@@ -1,0 +1,22 @@
+{
+  "name": "zapolo-next",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "brochure:pdf": "node scripts/generate-brochure-pdf.mjs"
+  },
+  "dependencies": {
+    "next": "latest",
+    "nodemailer": "^8.0.8",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "25.9.1",
+    "@types/react": "19.2.15",
+    "puppeteer": "^24.12.1",
+    "typescript": "6.0.3"
+  }
+}

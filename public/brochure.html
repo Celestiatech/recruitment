@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recruitment Agency — Brochure</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="fonts.googleapis.com/css2.css?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;family=Roboto:wght@100;300;400;500;700;900&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    :root{
+      --brand-1:#fe4c1c;
+      --brand-2:#fead44;
+      --ink:#1f2430;
+      --muted:#5b6578;
+      --line:rgba(0,0,0,.10);
+      --soft:rgba(0,0,0,.06);
+    }
+    @page { size: A4; margin: 12mm; }
+    html, body { background: #fff; }
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; font-family:"Roboto", sans-serif; color:var(--ink); }
+    a { color: inherit; text-decoration: none; }
+
+    .pdf-wrap { max-width: 980px; margin: 0 auto; }
+    .pdf-page { min-height: 271mm; position: relative; }
+    .pdf-page + .pdf-page { margin-top: 14mm; page-break-before: always; }
+
+    .pdf-topbar { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom: 10px; }
+    .pdf-brand { display:flex; align-items:center; gap:10px; }
+    .pdf-brand img { height: 34px; width:auto; }
+    .pdf-brand .name { font-weight:800; letter-spacing:.02em; }
+    .pdf-pill { font-size:11px; padding:6px 10px; border:1px solid var(--line); border-radius:999px; color:var(--muted); }
+
+    .pdf-hero {
+      border-radius: 22px;
+      padding: 30px 26px;
+      background: linear-gradient(135deg, var(--brand-1) 0%, var(--brand-2) 100%);
+      color: #fff;
+      overflow:hidden;
+      position:relative;
+    }
+    .pdf-hero:before{
+      content:"";
+      position:absolute;
+      right:-120px;
+      top:-120px;
+      width:320px;
+      height:320px;
+      border-radius:50%;
+      background: rgba(255,255,255,.16);
+    }
+    .pdf-hero:after{
+      content:"";
+      position:absolute;
+      right:40px;
+      bottom:-140px;
+      width:420px;
+      height:420px;
+      border-radius:50%;
+      background: rgba(0,0,0,.08);
+    }
+    .pdf-hero h1 { color:#fff; margin: 10px 0 10px; font-size: 36px; line-height:1.15; letter-spacing:-.02em; }
+    .pdf-hero p { margin: 0; max-width: 680px; color: rgba(255,255,255,.94); font-size: 13.5px; line-height:1.55; }
+    .pdf-hero-grid{ display:grid; grid-template-columns: 1.1fr .9fr; gap:18px; margin-top:16px; position:relative; z-index:1; }
+    .pdf-hero-card{
+      background: rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.22);
+      border-radius: 16px;
+      padding: 14px 14px;
+    }
+    .pdf-hero-card h3{ margin:0 0 6px; font-size:14px; color:#fff; }
+    .pdf-hero-card p{ margin:0; font-size:12.5px; color: rgba(255,255,255,.92); }
+    .pdf-hero-media{
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.08);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height: 150px;
+    }
+    .pdf-hero-media img{ width:100%; height:100%; object-fit:cover; }
+
+    .pdf-stats{ display:grid; grid-template-columns: repeat(3,1fr); gap:12px; margin-top: 14px; }
+    .pdf-stat{ border:1px solid var(--line); border-radius:14px; padding:12px 12px; background: #fff; }
+    .pdf-stat .k{ font-weight:900; font-size:18px; }
+    .pdf-stat .l{ margin-top:2px; color:var(--muted); font-size:11.5px; }
+
+    .pdf-section{ margin-top: 16px; }
+    .pdf-h2{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin: 0 0 10px; }
+    .pdf-h2 h2{ margin:0; font-size: 18px; letter-spacing:-.01em; }
+    .pdf-h2 .hint{ color:var(--muted); font-size:11.5px; }
+
+    .pdf-cards{ display:grid; grid-template-columns: repeat(3,1fr); gap:12px; }
+    .pdf-card{ border:1px solid var(--line); border-radius:16px; padding:12px 12px; background:#fff; }
+    .pdf-card .t{ font-weight:800; margin:0 0 6px; font-size:13px; }
+    .pdf-card .d{ margin:0; color:var(--muted); font-size:12px; line-height:1.5; }
+    .pdf-card .chip{ display:inline-block; margin-top:10px; font-size:11px; padding:6px 10px; border-radius:999px; background: rgba(254,76,28,.10); color: var(--brand-1); font-weight:700; }
+
+    .pdf-steps{ display:grid; grid-template-columns: repeat(4,1fr); gap:10px; }
+    .pdf-step{ border:1px dashed rgba(254,76,28,.35); border-radius:16px; padding:12px 12px; background: rgba(254,76,28,.05); }
+    .pdf-step .n{ font-weight:900; color: var(--brand-1); font-size:12px; }
+    .pdf-step .t{ font-weight:800; margin:4px 0 6px; font-size:13px; }
+    .pdf-step .d{ margin:0; color: var(--muted); font-size:11.5px; line-height:1.45; }
+
+    .pdf-pricing{ display:grid; grid-template-columns: repeat(3,1fr); gap:12px; }
+    .pdf-price{ border:1px solid var(--line); border-radius:18px; padding:14px 14px; background:#fff; }
+    .pdf-price.featured{ border-color: rgba(254,76,28,.45); box-shadow: 0 10px 24px rgba(0,0,0,.06); }
+    .pdf-price .tag{ font-size:11px; font-weight:900; text-transform:uppercase; letter-spacing:.06em; color: var(--brand-1); }
+    .pdf-price .amt{ font-size:26px; font-weight:900; margin:8px 0 2px; }
+    .pdf-price .sub{ margin:0 0 10px; font-size:11.5px; color: var(--muted); }
+    .pdf-ul{ margin:0; padding-left: 16px; color: var(--muted); font-size:11.5px; }
+    .pdf-ul li{ margin:6px 0; }
+
+    .pdf-testimonials{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    .pdf-quote{ border:1px solid var(--line); border-radius:16px; padding:12px 12px; background:#fff; }
+    .pdf-quote .q{ margin:0 0 10px; color: var(--muted); font-size:12px; line-height:1.55; }
+    .pdf-quote .a{ display:flex; gap:10px; align-items:center; }
+    .pdf-quote .a img{ width:34px; height:34px; border-radius:10px; object-fit:cover; border:1px solid var(--soft); }
+    .pdf-quote .a .n{ font-weight:900; font-size:12.5px; }
+    .pdf-quote .a .r{ color:var(--muted); font-size:11px; margin-top:1px; }
+
+    .pdf-cta{
+      margin-top: 16px;
+      border-radius: 18px;
+      border:1px solid rgba(254,76,28,.22);
+      background: linear-gradient(135deg, rgba(254,76,28,.10) 0%, rgba(254,173,68,.10) 100%);
+      padding: 14px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .pdf-cta .left h3{ margin:0 0 4px; font-size:14px; }
+    .pdf-cta .left p{ margin:0; color:var(--muted); font-size:11.5px; }
+    .pdf-cta .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 12px;
+      border-radius: 12px;
+      font-weight:900;
+      font-size:12px;
+      color:#fff;
+      background: var(--brand-1);
+      border: 1px solid rgba(0,0,0,.06);
+      white-space:nowrap;
+    }
+
+    .pdf-footer{ margin-top: 14px; padding-top: 12px; border-top:1px solid var(--line); display:flex; gap:10px; align-items:center; }
+    .pdf-footer .meta{ margin-left:auto; text-align:right; font-size:11px; color:var(--muted); }
+    .pdf-note{ font-size:10.5px; color: #7a8497; margin-top:8px; }
+
+    @media print { .pdf-page + .pdf-page { margin-top:0; } }
+  </style>
+</head>
+<body>
+  <div class="pdf-wrap">
+    <div class="pdf-page">
+      <div class="pdf-topbar">
+        <div class="pdf-brand">
+          <img src="images/logo.png" alt="Logo" />
+          <div class="name">Recruitment Agency</div>
+        </div>
+        <div class="pdf-pill">Brochure • 2026</div>
+      </div>
+
+      <div class="pdf-hero">
+        <div style="position:relative; z-index:1;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <img src="images/logo-white.png" alt="Logo" style="height:36px;width:auto;" />
+            <div style="font-weight:800; letter-spacing:.02em;">Recruitment Agency</div>
+          </div>
+          <h1>Hire Better. Get Hired Faster.</h1>
+          <p>We connect companies and candidates with a structured recruitment process—clear requirements, curated shortlists, fast feedback loops, and smooth offer-to-joining coordination.</p>
+
+          <div class="pdf-hero-grid">
+            <div class="pdf-hero-card">
+              <h3>For Employers</h3>
+              <p>Share requirements → get curated profiles → interview faster → close confidently.</p>
+            </div>
+            <div class="pdf-hero-media">
+              <img src="images/pic1.jpg" alt="Team" />
+            </div>
+          </div>
+
+          <div class="pdf-stats">
+            <div class="pdf-stat">
+              <div class="k">Fast</div>
+              <div class="l">Shortlists &amp; scheduling</div>
+            </div>
+            <div class="pdf-stat">
+              <div class="k">Quality</div>
+              <div class="l">Role-matched profiles</div>
+            </div>
+            <div class="pdf-stat">
+              <div class="k">Support</div>
+              <div class="l">Offer-to-joining follow-up</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pdf-section">
+        <div class="pdf-h2">
+          <h2>What We Do</h2>
+          <div class="hint">Clear, structured hiring for both sides</div>
+        </div>
+        <div class="pdf-cards">
+          <div class="pdf-card">
+            <div class="t">Talent Sourcing</div>
+            <p class="d">Targeted outreach, referrals, and role-based search to find the right candidates.</p>
+            <span class="chip">Employers</span>
+          </div>
+          <div class="pdf-card">
+            <div class="t">Screening &amp; Shortlisting</div>
+            <p class="d">Pre-screening for skills, communication, and fit—so interviews focus on the best.</p>
+            <span class="chip">Employers</span>
+          </div>
+          <div class="pdf-card">
+            <div class="t">Interview &amp; Offer Support</div>
+            <p class="d">Scheduling, feedback follow-ups, negotiation support, and joining coordination.</p>
+            <span class="chip">Employers + Candidates</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pdf-section">
+        <div class="pdf-h2">
+          <h2>How It Works</h2>
+          <div class="hint">Simple workflow</div>
+        </div>
+        <div class="pdf-steps">
+          <div class="pdf-step">
+            <div class="n">01</div>
+            <div class="t">Requirement</div>
+            <p class="d">Role details, skills, budget, timeline.</p>
+          </div>
+          <div class="pdf-step">
+            <div class="n">02</div>
+            <div class="t">Shortlist</div>
+            <p class="d">Pre-screened profiles shared quickly.</p>
+          </div>
+          <div class="pdf-step">
+            <div class="n">03</div>
+            <div class="t">Interviews</div>
+            <p class="d">Scheduling + feedback loop management.</p>
+          </div>
+          <div class="pdf-step">
+            <div class="n">04</div>
+            <div class="t">Offer &amp; Join</div>
+            <p class="d">Offer support, joining follow-ups.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pdf-footer">
+        <div class="pdf-note">Tip: Replace the contact placeholders below with your real details before sharing.</div>
+        <div class="meta">
+          <div><strong>Phone:</strong> +91-XXXXXXXXXX</div>
+          <div><strong>Email:</strong> info@yourdomain.com</div>
+          <div><strong>Website:</strong> yourdomain.com</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pdf-page">
+      <div class="pdf-topbar">
+        <div class="pdf-brand">
+          <img src="images/logo.png" alt="Logo" />
+          <div class="name">Recruitment Agency</div>
+        </div>
+        <div class="pdf-pill">Pricing • Testimonials</div>
+      </div>
+
+      <div class="pdf-section">
+        <div class="pdf-h2">
+          <h2>Simple Pricing</h2>
+          <div class="hint">Transparent options</div>
+        </div>
+        <div class="pdf-pricing">
+          <div class="pdf-price">
+            <div class="tag">Candidate One-Time</div>
+            <div class="amt">₹500</div>
+            <p class="sub">One-time payment</p>
+            <ul class="pdf-ul">
+              <li>Profile review</li>
+              <li>Job matching</li>
+              <li>Interview scheduling support</li>
+            </ul>
+          </div>
+          <div class="pdf-price featured">
+            <div class="tag">Candidate Success</div>
+            <div class="amt">50%</div>
+            <p class="sub">After joining (50% of first salary)</p>
+            <ul class="pdf-ul">
+              <li>Pay only on selection</li>
+              <li>Priority matching</li>
+              <li>Joining support</li>
+            </ul>
+          </div>
+          <div class="pdf-price">
+            <div class="tag">Company Hiring</div>
+            <div class="amt">₹500</div>
+            <p class="sub">Per selection</p>
+            <ul class="pdf-ul">
+              <li>Requirement intake</li>
+              <li>Shortlists</li>
+              <li>Offer &amp; joining coordination</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pdf-note">Note: Pricing can be customized by role type, seniority, and hiring volume.</div>
+      </div>
+
+      <div class="pdf-section">
+        <div class="pdf-h2">
+          <h2>What People Say</h2>
+          <div class="hint">Employers &amp; candidates</div>
+        </div>
+        <div class="pdf-testimonials">
+          <div class="pdf-quote">
+            <p class="q">“We received strong, pre-screened profiles within days. Communication was clear, and we closed the role quickly.”</p>
+            <div class="a">
+              <img src="images/testimonials/pic1.jpg" alt="Riya" />
+              <div>
+                <div class="n">Riya Mehta</div>
+                <div class="r">HR Manager</div>
+              </div>
+            </div>
+          </div>
+          <div class="pdf-quote">
+            <p class="q">“They matched me with roles aligned to my skills and guided me through each round. I felt supported end-to-end.”</p>
+            <div class="a">
+              <img src="images/testimonials/pic2.jpg" alt="Arjun" />
+              <div>
+                <div class="n">Arjun Singh</div>
+                <div class="r">Software Engineer</div>
+              </div>
+            </div>
+          </div>
+          <div class="pdf-quote">
+            <p class="q">“Great turnaround and quality. Shortlists were relevant, feedback loops were fast, and joining was handled professionally.”</p>
+            <div class="a">
+              <img src="images/testimonials/pic3.jpg" alt="Neha" />
+              <div>
+                <div class="n">Neha Kapoor</div>
+                <div class="r">Founder</div>
+              </div>
+            </div>
+          </div>
+          <div class="pdf-quote">
+            <p class="q">“The process was structured and transparent. I always knew the next step and the timeline.”</p>
+            <div class="a">
+              <img src="images/testimonials/pic1.jpg" alt="Client" />
+              <div>
+                <div class="n">Client Feedback</div>
+                <div class="r">Hiring Partner</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pdf-cta">
+        <div class="left">
+          <h3>Ready to work together?</h3>
+          <p>Send your requirement or resume and we’ll respond quickly.</p>
+        </div>
+        <div class="btn">Contact Us</div>
+      </div>
+
+      <div class="pdf-footer">
+        <div class="pdf-brand">
+          <img src="images/logo.png" alt="Logo" />
+          <div class="name">Recruitment Agency</div>
+        </div>
+        <div class="meta">
+          <div><strong>Phone:</strong> +91-XXXXXXXXXX</div>
+          <div><strong>Email:</strong> info@yourdomain.com</div>
+          <div><strong>Website:</strong> yourdomain.com</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
