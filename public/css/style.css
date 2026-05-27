@@ -12968,6 +12968,7 @@ ul a.rsswidget {
     position: absolute;
     right: 40px;
     top: 50%;
+    width: 250px!important;
     transform: translateY(-50%); }
   .about-bx1 .dz-media .group-img {
     transform: scale(1.22);
@@ -15017,7 +15018,7 @@ ul a.rsswidget {
     .banner-one .banner-media .img-2 {
       position: absolute;
       top: 55px;
-      left: 55px;
+      left: 0px;
       border-radius: 20px;
       box-shadow: 1px 1.732px 60px 0px rgba(0, 0, 0, 0.1); }
   .banner-one .wave-img-1 {
@@ -15065,7 +15066,7 @@ ul a.rsswidget {
         right: -150px; }
       .banner-one .banner-media .img-2 {
         top: 20px;
-        left: 20px;
+        left: 0px;
         height: 130px; } }
   @media only screen and (max-width: 767px) {
     .banner-one {
