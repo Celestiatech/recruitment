@@ -236,7 +236,7 @@ var Zapolo = function(){
 					$('.site-header .container > .logo-header .logo-3').attr('src','images/logo-3.png');
 				} else {
 					menu.removeClass('is-fixed');
-					$('.site-header .container > .logo-header .logo, .site-header .container > .logo-header .logo-2, .site-header .container > .logo-header .logo-3').attr('src','images/logo-white.png')
+					$('.site-header .container > .logo-header .logo, .site-header .container > .logo-header .logo-2, .site-header .container > .logo-header .logo-3').attr('src','images/logodark.png')
 				}
 			}
 		});
