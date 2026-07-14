@@ -191,8 +191,8 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-7 m-b40">
-						<form class="dz-form dzForm" method="POST" action="script/contact.php">
-							<div class="dzFormMsg"></div>
+						<form class="dz-form dzForm" id="contactForm" onsubmit="return handleContactForm(event)">
+							<div class="dzFormMsg d-none" id="contactFormMsg"></div>
 							<input type="hidden" class="form-control" name="dzToDo" value="Contact" >
 							<div class="row">
 								<div class="col-sm-6">
@@ -220,14 +220,9 @@
 										<textarea name="dzMessage" rows="4" required class="form-control" placeholder="Message"></textarea>
 									</div>
 								</div>
+	
 								<div class="col-sm-12">
-									<div class="input-group">
-										<div class="g-recaptcha" data-sitekey="6LefsVUUAAAAADBPsLZzsNnETChealv6PYGzv3ZN" data-callback="verifyRecaptchaCallback" data-expired-callback="expiredRecaptchaCallback"></div>
-										<input class="form-control d-none" style="display:none;" data-recaptcha="true" required data-error="Please complete the Captcha">
-									</div>
-								</div>
-								<div class="col-sm-12">
-									<button name="submit" type="submit" value="Submit" class="btn btn-primary shadow-primary">Submit Now</button>
+									<button name="submit" type="submit" class="btn btn-primary shadow-primary">Send on WhatsApp</button>
 								</div>
 							</div>
 						</form>
@@ -454,8 +449,37 @@
 <script src='https://www.google.com/recaptcha/api.js'></script> <!-- Google API For Recaptcha  -->
 <script src="vendor/tilt/js/tilt.jquery.js"></script>
 <script src="js/dz.carousel.js"></script><!-- OWL-CAROUSEL -->
-<script src="js/dz.ajax.js"></script><!-- AJAX -->
 <script src="js/custom.js"></script><!-- CUSTOM JS -->
+<script>
+function handleContactForm(e) {
+  e.preventDefault();
+  var form = document.getElementById('contactForm');
+  var data = new FormData(form);
+  var firstName = String(data.get('dzName') || '').trim();
+  var lastName = String(data.get('dzOther[last_name required]') || '').trim();
+  var phone = String(data.get('dzOther[phone]') || '').trim();
+  var email = String(data.get('dzEmail') || '').trim();
+  var message = String(data.get('dzMessage') || '').trim();
+
+  if (!firstName || !email) {
+    var msg = document.getElementById('contactFormMsg');
+    msg.className = 'dzFormMsg alert alert-danger';
+    msg.textContent = 'Please fill in your name and email.';
+    msg.classList.remove('d-none');
+    return false;
+  }
+
+  var fullName = lastName ? firstName + ' ' + lastName : firstName;
+  var msgText = '*New Contact Us Request*\n\n' +
+    '*Name:* ' + fullName + '\n' +
+    '*Email:* ' + email + '\n' +
+    '*Phone:* ' + (phone || '-') + '\n' +
+    '*Message:* ' + (message || '-');
+
+  window.open('https://wa.me/919805559015?text=' + encodeURIComponent(msgText), '_blank');
+  return false;
+}
+</script>
 <script src="js/dznav-init.js"></script><!-- DZNAV-INIT.JS -->
 
 <!-- <script src="vendor/switcher/switcher.js"></script> --> <!-- SWITCHER -->
