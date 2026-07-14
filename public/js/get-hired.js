@@ -175,8 +175,7 @@
     showFallbackModal(el);
   }
 
-  async function submit(form) {
-    var btn = document.getElementById("getHiredSubmit");
+  function submit(form) {
     var ok = document.getElementById("getHiredOk");
     var err = document.getElementById("getHiredErr");
 
@@ -184,39 +183,34 @@
     err.classList.add("d-none");
     err.textContent = "";
 
-    btn.disabled = true;
-    btn.textContent = "Submitting...";
-    try {
-      var data = new FormData(form);
-      var payload = {
-        name: String(data.get("name") || ""),
-        email: String(data.get("email") || ""),
-        phone: String(data.get("phone") || ""),
-        place: String(data.get("place") || ""),
-        role: String(data.get("role") || ""),
-        experience: String(data.get("experience") || "")
-      };
+    var data = new FormData(form);
+    var name = String(data.get("name") || "").trim();
+    var email = String(data.get("email") || "").trim();
+    var phone = String(data.get("phone") || "").trim();
+    var place = String(data.get("place") || "").trim();
+    var role = String(data.get("role") || "").trim();
+    var experience = String(data.get("experience") || "").trim();
 
-      var res = await fetch("/api/hire", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-      var json = await res.json().catch(function () {
-        return null;
-      });
-      if (!res.ok) {
-        throw new Error((json && json.error) || "Failed to submit.");
-      }
-      ok.classList.remove("d-none");
-      form.reset();
-    } catch (e) {
-      err.textContent = e && e.message ? e.message : "Failed to submit.";
+    if (!name || !email) {
+      err.textContent = "Please fill in your name and email.";
       err.classList.remove("d-none");
-    } finally {
-      btn.disabled = false;
-      btn.textContent = "Submit";
+      return;
     }
+
+    var msg = "*New Get Hired Request*\n\n" +
+      "*Name:* " + name + "\n" +
+      "*Email:* " + email + "\n" +
+      "*Phone:* " + (phone || "-") + "\n" +
+      "*Place:* " + (place || "-") + "\n" +
+      "*Role:* " + (role || "-") + "\n" +
+      "*Experience:* " + (experience || "-");
+
+    var url = "https://wa.me/919805559015?text=" + encodeURIComponent(msg);
+    window.open(url, "_blank");
+
+    ok.classList.remove("d-none");
+    ok.textContent = "WhatsApp opened! Please send the message.";
+    form.reset();
   }
 
   document.addEventListener("click", function (e) {
