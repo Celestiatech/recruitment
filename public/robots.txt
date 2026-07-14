@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+Disallow: /post-*.html
+Disallow: /portfolio*.html
+Disallow: /index-2.html
+Disallow: /index-3.html
+Disallow: /comming-soon.html
+Disallow: /under-construct.html
+Disallow: /error-404.html
+Disallow: /blog-grid-*.html
+Disallow: /blog-list-*.html
+Disallow: /blog-large-*.html
+Disallow: /blog-details.html
+Disallow: /brochure.html
+Disallow: /vendor/
+Disallow: /js/
+
+Sitemap: https://www.yourdomain.com/sitemap.xml
